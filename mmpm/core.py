@@ -246,7 +246,6 @@ def upgrade_available_packages_and_applications(assume_yes: bool = False, select
         print('Restart MagicMirror for the changes to take effect')
 
 
-
 def check_for_package_updates(packages: Dict[str, List[MagicMirrorPackage]]) -> List[MagicMirrorPackage]:
     '''
     Depending on flags passed in as arguments:

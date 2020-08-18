@@ -123,10 +123,7 @@ def main(argv):
 
     elif args.subcmd == mmpm.opts.ADD_EXT_PKG:
         if args.remove:
-            mmpm.core.remove_external_package_source(
-                [mmpm.utils.sanitize_name(package) for package in args.remove],
-                assume_yes=args.assume_yes
-            )
+            mmpm.core.remove_external_package_source([mmpm.utils.sanitize_name(package) for package in args.remove], assume_yes=args.assume_yes)
         else:
             mmpm.core.add_external_package(args.title, args.author, args.repo, args.desc)
 
@@ -143,7 +140,7 @@ def main(argv):
             print('All packages are up to date')
         else:
             message: str = f"{total} {'upgrade' if total == 1 else 'upgrades'} {'is' if total == 1 else 'are'} available"
-            print(f'{message}. Run `mmpm list --upgradable` for details')
+            print(f'{message}. Run `mmpm list --upgradeable` for details')
 
     elif args.subcmd == mmpm.opts.UPGRADE:
         mmpm.core.upgrade_available_packages_and_applications(args.assume_yes, additional_args)
@@ -160,11 +157,7 @@ def main(argv):
         elif not additional_args:
             mmpm.utils.fatal_no_arguments_provided(args.subcmd)
         else:
-            installation_candidates = mmpm.core.get_installation_candidates(
-                packages,
-                [mmpm.utils.sanitize_name(package) for package in additional_args]
-            )
-
+            installation_candidates = mmpm.core.get_installation_candidates(packages, [mmpm.utils.sanitize_name(package) for package in additional_args])
             mmpm.core.install_packages(installation_candidates, assume_yes=args.assume_yes)
 
     elif args.subcmd == mmpm.opts.REMOVE:
